@@ -8,6 +8,6 @@ public class StartController {
 
     @GetMapping("/home")
     public String librarianHome(){
-        return "home";
+        return "start/home";
     }
 }
