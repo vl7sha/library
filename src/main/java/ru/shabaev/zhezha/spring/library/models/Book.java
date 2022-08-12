@@ -27,20 +27,17 @@ public class Book {
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date publishDate;
 
-    @ManyToOne
-    @JoinColumn(name = "publisher_id", referencedColumnName = "id")
-    private Publisher publisher;
+    @Column(name = "publisher_name")
+    private String publisherName;
 
-    @ManyToOne
-    @JoinColumn(name = "genre_id", referencedColumnName = "id")
-    private Genre genre;
+    @Column(name = "genres")
+    private String genres;
 
-    @ManyToMany(mappedBy = "books")
-    private List<Author> authors;
+    @Column(name = "authors")
+    private String authors;
 
-    @ManyToOne
-    @JoinColumn(name = "book_cover_id", referencedColumnName = "id")
-    private BookCover bookCover;
+    @Column(name = "cover")
+    private String cover;
 
     @OneToMany(mappedBy = "book")
     private List<UsageHistory> usages;
@@ -51,10 +48,15 @@ public class Book {
     public Book() {
     }
 
-    public Book(String name, int pagesCount, Date publishDate) {
+    public Book(String name, int pagesCount, Date publishDate,
+                String publisherName, String genres, String authors, String cover) {
         this.name = name;
         this.pagesCount = pagesCount;
         this.publishDate = publishDate;
+        this.publisherName = publisherName;
+        this.genres = genres;
+        this.authors = authors;
+        this.cover = cover;
     }
 
     public int getId() {
@@ -89,28 +91,36 @@ public class Book {
         this.publishDate = publishDate;
     }
 
-    public Publisher getPublisher() {
-        return publisher;
+    public String getPublisherName() {
+        return publisherName;
     }
 
-    public void setPublisher(Publisher publisher) {
-        this.publisher = publisher;
+    public void setPublisherName(String publisherName) {
+        this.publisherName = publisherName;
     }
 
-    public List<Author> getAuthors() {
+    public String getGenres() {
+        return genres;
+    }
+
+    public void setGenres(String genres) {
+        this.genres = genres;
+    }
+
+    public String getAuthors() {
         return authors;
     }
 
-    public void setAuthors(List<Author> authors) {
+    public void setAuthors(String authors) {
         this.authors = authors;
     }
 
-    public BookCover getBookCover() {
-        return bookCover;
+    public String getCover() {
+        return cover;
     }
 
-    public void setBookCover(BookCover bookCover) {
-        this.bookCover = bookCover;
+    public void setCover(String cover) {
+        this.cover = cover;
     }
 
     public List<UsageHistory> getUsages() {
@@ -119,14 +129,6 @@ public class Book {
 
     public void setUsages(List<UsageHistory> usages) {
         this.usages = usages;
-    }
-
-    public Genre getGenre() {
-        return genre;
-    }
-
-    public void setGenre(Genre genre) {
-        this.genre = genre;
     }
 
     public List<BookPosition> getPositions() {
@@ -144,6 +146,10 @@ public class Book {
                 ", name='" + name + '\'' +
                 ", pagesCount=" + pagesCount +
                 ", publishDate=" + publishDate +
+                ", publisherName='" + publisherName + '\'' +
+                ", genres='" + genres + '\'' +
+                ", authors='" + authors + '\'' +
+                ", cover='" + cover + '\'' +
                 '}';
     }
 

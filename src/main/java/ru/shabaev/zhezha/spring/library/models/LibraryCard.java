@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Library_Card")
@@ -99,5 +100,18 @@ public class LibraryCard {
                 ", livingAddress='" + livingAddress + '\'' +
                 ", expirationDate=" + expirationDate +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof LibraryCard)) return false;
+        LibraryCard that = (LibraryCard) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
