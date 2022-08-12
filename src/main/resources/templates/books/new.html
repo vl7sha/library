@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div>
+  <p>Select options</p>
+  <ol>
+    <li><a href="../start/home.html" th:href='@{/start/home.html}'> Home</a></li>
+  </ol>
+  <form th:method="POST" th:action="@{/new}" th:object="${book}">
+    <div>
+      <label for="name">Enter name</label>
+      <input type="text" th:field="*{name}" id="name">
+    </div>
+    <div>
+      <label for="pagesCount">Enter count pages</label>
+      <input type="text" th:field="*{pagesCount}" id="pagesCount">
+    </div>
+    <div>
+      <label for="publishDate">Enter date</label>
+      <input type="text"  th:field="*{publishDate}" id="publishDate">
+    </div>
+    <div>
+      <label for="publisherName">Enter publisher:</label>
+      <input type="text" th:field="*{publisherName}" id="publisherName">
+    </div>
+    <div>
+      <label for="genres">Enter genres:</label>
+      <input type="text" th:field="*{genres}" id="genres">
+    </div>
+    <div>
+      <label for="cover">Enter cover</label>
+      <input type="text" th:field="*{cover}" id="cover">
+    </div>
+  </form>
+</div>
+</body>
+</html>

@@ -39,6 +39,6 @@ public class BookController {
     @PostMapping()
     public String create(@ModelAttribute Book book) {
         bookService.save(book);
-        return "redirect:/home";
+        return "redirect:start/home";
     }
 }
