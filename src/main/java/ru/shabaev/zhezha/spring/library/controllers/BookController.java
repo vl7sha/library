@@ -36,9 +36,27 @@ public class BookController {
         return "books/new";
     }
 
+    @GetMapping("/{id}/edit")
+    public String edit(Model model, @PathVariable("id") int id) {
+        model.addAttribute("book", bookService.findOne(id));
+        return "books/edit";
+    }
+
     @PostMapping()
     public String create(@ModelAttribute Book book) {
         bookService.save(book);
-        return "redirect:start/home";
+        return "redirect:/home";
+    }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable("id") int id) {
+        bookService.delete(id);
+        return "redirect:/home";
+    }
+
+    @PatchMapping("/{id}")
+    public String update(@ModelAttribute Book book,@PathVariable("id") int id) {
+        bookService.update(id, book);
+        return "redirect:/home";
     }
 }
