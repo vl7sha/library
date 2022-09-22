@@ -42,6 +42,17 @@ public class BookController {
         return "books/edit";
     }
 
+    @GetMapping("/search")
+    public String searchPage() {
+        return "books/search";
+    }
+
+    @PostMapping("/search")
+    public String makeSearch(Model model, @RequestParam(name = "name") String name) {
+        model.addAttribute("books", bookService.searchByName(name));
+        return "books/search";
+    }
+
     @PostMapping()
     public String create(@ModelAttribute Book book) {
         bookService.save(book);

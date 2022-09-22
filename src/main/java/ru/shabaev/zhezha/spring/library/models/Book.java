@@ -30,32 +30,30 @@ public class Book {
     @Column(name = "publisher_name")
     private String publisherName;
 
-    @Column(name = "genres")
-    private String genres;
-
-    @Column(name = "authors")
-    private String authors;
-
     @Column(name = "cover")
     private String cover;
-
+    
     @OneToMany(mappedBy = "book")
     private List<UsageHistory> usages;
 
     @OneToMany(mappedBy = "book")
     private List<BookPosition> positions;
 
+    @ManyToMany(mappedBy = "books")
+    private List<Genre> genres;
+
+    @ManyToMany(mappedBy = "books")
+    private List<Author> authors;
+
     public Book() {
     }
 
     public Book(String name, int pagesCount, Date publishDate,
-                String publisherName, String genres, String authors, String cover) {
+            String publisherName, String cover) {
         this.name = name;
         this.pagesCount = pagesCount;
         this.publishDate = publishDate;
         this.publisherName = publisherName;
-        this.genres = genres;
-        this.authors = authors;
         this.cover = cover;
     }
 
@@ -99,19 +97,19 @@ public class Book {
         this.publisherName = publisherName;
     }
 
-    public String getGenres() {
+    public List<Genre> getGenres() {
         return genres;
     }
 
-    public void setGenres(String genres) {
+    public void setGenres(List<Genre> genres) {
         this.genres = genres;
     }
 
-    public String getAuthors() {
+    public List<Author> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(String authors) {
+    public void setAuthors(List<Author> authors) {
         this.authors = authors;
     }
 
@@ -147,16 +145,16 @@ public class Book {
                 ", pagesCount=" + pagesCount +
                 ", publishDate=" + publishDate +
                 ", publisherName='" + publisherName + '\'' +
-                ", genres='" + genres + '\'' +
-                ", authors='" + authors + '\'' +
                 ", cover='" + cover + '\'' +
                 '}';
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Book)) return false;
+        if (this == o)
+            return true;
+        if (!(o instanceof Book))
+            return false;
         Book book = (Book) o;
         return id == book.id;
     }

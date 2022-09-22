@@ -9,7 +9,6 @@ import ru.shabaev.zhezha.spring.library.repositories.BookRepository;
 import java.util.List;
 import java.util.Optional;
 
-
 @Service
 @Transactional(readOnly = true)
 public class BookService {
@@ -21,28 +20,32 @@ public class BookService {
         this.repository = repository;
     }
 
-    public List<Book> findAll(){
+    public List<Book> findAll() {
         return repository.findAll();
     }
 
-    public Book findOne(int id){
+    public Book findOne(int id) {
         Optional<Book> foundEntity = repository.findById(id);
         return foundEntity.orElse(null);
     }
 
+    public List<Book> searchByName(String name) {
+        return repository.findByNameStartingWith(name);
+    }
+
     @Transactional
-    public void save(Book entity){
+    public void save(Book entity) {
         repository.save(entity);
     }
 
     @Transactional
-    public void update(int id, Book updatedEntity){
+    public void update(int id, Book updatedEntity) {
         updatedEntity.setId(id);
         repository.save(updatedEntity);
     }
 
     @Transactional
-    public void delete(int id){
+    public void delete(int id) {
         repository.deleteById(id);
     }
 }
