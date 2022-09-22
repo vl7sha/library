@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>Edit book</title>
 </head>
 <body>
 <div>
@@ -10,7 +10,7 @@
   <ol>
     <li><a href="../home" th:href='@{/home}'> Home</a></li>
   </ol>
-  <form th:method="POST" th:action="@{/books/}" th:object="${book}">
+  <form th:method="PATCH" th:action="@{/books/{id}(id=${book.getId()})}" th:object="${book}">
     <div>
       <label for="name">Enter name</label>
       <input type="text" th:field="*{name}" id="name">
@@ -40,7 +40,7 @@
       <input type="text" th:field="*{cover}" id="cover">
     </div>
     <div>
-      <input type="submit" value="create">
+      <input type="submit" value="update">
     </div>
   </form>
 </div>
